@@ -28,6 +28,7 @@ public class DummyContent {
         addItem(new DummyItem("1", "Property 1"));
         addItem(new DummyItem("2", "Property 2"));
         addItem(new DummyItem("3", "Property 3"));
+        addItem(new DummyItem("4", "Property 4"));
     }
 
     private static void addItem(DummyItem item) {
