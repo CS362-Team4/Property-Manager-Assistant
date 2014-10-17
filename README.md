@@ -1,4 +1,3 @@
 Property-Manager-Assistant
 ==========================
-CPSC362 at CSUF
-This is the main project for group 4.
+This is the main project for group 4, CPSC362 at CSUF.
