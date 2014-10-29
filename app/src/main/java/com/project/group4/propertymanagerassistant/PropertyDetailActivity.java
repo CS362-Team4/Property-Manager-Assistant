@@ -3,6 +3,9 @@ package com.project.group4.propertymanagerassistant;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
 
@@ -16,7 +19,7 @@ import android.view.MenuItem;
  * This activity is mostly just a 'shell' activity containing nothing
  * more than a {@link PropertyDetailFragment}.
  */
-public class PropertyDetailActivity extends Activity {
+public class PropertyDetailActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +45,13 @@ public class PropertyDetailActivity extends Activity {
             arguments.putString(PropertyDetailFragment.ARG_ITEM_ID,
                     getIntent().getStringExtra(PropertyDetailFragment.ARG_ITEM_ID));
             PropertyDetailFragment fragment = new PropertyDetailFragment();
+
+
             fragment.setArguments(arguments);
-            getFragmentManager().beginTransaction()
-                    .add(R.id.property_detail_container, fragment)
-                    .commit();
+            //
+            FragmentManager fragmentManager = getSupportFragmentManager();//get frag manager
+            fragmentManager.beginTransaction().add(R.id.property_detail_container, fragment).commit();//set it
+            //getFragmentManager().beginTransaction().add(R.id.property_detail_container, fragment).commit();
         }
     }
 

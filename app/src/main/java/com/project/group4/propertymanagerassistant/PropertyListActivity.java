@@ -3,8 +3,7 @@ package com.project.group4.propertymanagerassistant;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
-
-
+import android.support.v4.app.FragmentActivity;
 
 
 /**
@@ -23,7 +22,7 @@ import android.app.Activity;
  * {@link PropertyListFragment.Callbacks} interface
  * to listen for item selections.
  */
-public class PropertyListActivity extends Activity
+public class PropertyListActivity extends FragmentActivity
         implements PropertyListFragment.Callbacks {
 
     /**
@@ -68,7 +67,7 @@ public class PropertyListActivity extends Activity
             arguments.putString(PropertyDetailFragment.ARG_ITEM_ID, id);
             PropertyDetailFragment fragment = new PropertyDetailFragment();
             fragment.setArguments(arguments);
-            getFragmentManager().beginTransaction()
+            getSupportFragmentManager().beginTransaction()
                     .replace(R.id.property_detail_container, fragment)
                     .commit();
 
