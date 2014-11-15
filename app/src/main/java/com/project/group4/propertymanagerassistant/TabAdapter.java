@@ -3,11 +3,19 @@ package com.project.group4.propertymanagerassistant;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.util.Log;
 
 
 class TabAdapter extends FragmentStatePagerAdapter {//to save state, use statepageradptapter
                                                 //will call savestate when scroll two fragments away, and it will detach, which destroys
                                                 //usefull when you wan to save state
+
+    //MY LOGGING ID STRING
+    private static final String TAG = "TabAdaptor";
+
+    //Set current object propertyId
+    Long propertyId;
+
 
 //base constructor
     public TabAdapter(FragmentManager fm) {
@@ -24,21 +32,28 @@ class TabAdapter extends FragmentStatePagerAdapter {//to save state, use statepa
             fragment = new FragmentTransactionTab();
         }
         if(i==1){
+            fragment = new FragmentPropertyTab();
+            ((FragmentPropertyTab) fragment).setPropertyId(propertyId);//Passing property id to the fragment
+        }
+        if(i==2){
             fragment = new FragmentTenantTab();
 
         }
-        if(i==2){
-            fragment = new FragmentOwnerTab();
-        }
         if(i==3){
+            fragment = new FragmentOwnerTab();
+            ((FragmentOwnerTab) fragment).setPropertyId(propertyId);//Passing property id to the fragment
+        }
+        if(i==4){
             fragment = new FragmentReportTab();
         }
+
+        
         return fragment;
     }
 
     @Override
     public int getCount() {
-        return 4;//static assignment
+        return 5;//static assignment
     }
 //return active frag for title
     @Override
@@ -49,14 +64,32 @@ class TabAdapter extends FragmentStatePagerAdapter {//to save state, use statepa
             returnString = "Transaction";
         }
         if(position==1){
-            returnString = "Tenant";
+            returnString = "Property";
         }
         if(position==2){
-            returnString = "Owner";
+            returnString = "Tenant";
         }
         if(position==3){
+            returnString = "Owner";
+        }
+        if(position==4){
             returnString = "Report";
         }
         return returnString;
     }
+
+
+    //Simply reloads fragment...
+    @Override
+    public int getItemPosition(Object object) {
+        return POSITION_NONE;
+    }
+
+    //Sets the property id for any fragment
+    public void setId(Long data){
+        propertyId = data;
+    }
+
+
+
 }

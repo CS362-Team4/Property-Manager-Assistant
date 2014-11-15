@@ -1,14 +1,23 @@
 package com.project.group4.propertymanagerassistant;
 
 import android.app.Activity;
+import android.support.v4.app.ListFragment;
+import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
+import android.support.v4.widget.SimpleCursorAdapter;
+import android.database.Cursor;
 import android.os.Bundle;
-import android.app.ListFragment;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.view.ViewGroup;
 import android.widget.ListView;
 
 
-import com.project.group4.propertymanagerassistant.dummy.DummyContent;
+import com.project.group4.propertymanagerassistant.database.DummyContent;
+import com.project.group4.propertymanagerassistant.database.Property;
+import com.project.group4.propertymanagerassistant.database.PropertyProvider;
 
 /**
  * A list fragment representing a list of Properties. This fragment
@@ -47,7 +56,7 @@ public class PropertyListFragment extends ListFragment {
         /**
          * Callback for when an item has been selected.
          */
-        public void onItemSelected(String id);
+        public void onItemSelected(Long id);
     }
 
     /**
@@ -56,7 +65,7 @@ public class PropertyListFragment extends ListFragment {
      */
     private static Callbacks sDummyCallbacks = new Callbacks() {
         @Override
-        public void onItemSelected(String id) {
+        public void onItemSelected(Long id) {
         }
     };
 
@@ -70,14 +79,47 @@ public class PropertyListFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Log.d("PropListFragment", "PropListFrag: onCreate");
         // TODO: replace with a real list adapter.
-        setListAdapter(new ArrayAdapter<DummyContent.DummyItem>(
-                getActivity(),
+        //HERE WE NEED TO GET OUR CUSTOM LAYOUT
+        setListAdapter(new SimpleCursorAdapter(getActivity(),
                 android.R.layout.simple_list_item_activated_1,
-                android.R.id.text1,
-                DummyContent.ITEMS));
-    }
+                null,
+                new String[] {Property.COL_ADDRESS },//From Property colomn "address", build string array
+                new int [] {android.R.id.text1} /*new int[] { R.id.property_list}*/,//Send that string array from beore to this layout
+                0));
+
+
+
+
+        // Load the content
+        getLoaderManager().initLoader(0, null, new LoaderCallbacks<Cursor>()
+        {
+            @Override
+            public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+                Log.d("PropListFrag", "getLoaderManager()");
+                return new CursorLoader(getActivity(), PropertyProvider.URI_PROPERTY, Property.FIELDS, null ,null, null);
+
+            }
+
+            @Override
+            public void onLoadFinished(android.support.v4.content.Loader<Cursor> loader, Cursor c) {
+                ((SimpleCursorAdapter) getListAdapter()).swapCursor(c);
+            }
+
+            @Override
+            public void onLoaderReset(android.support.v4.content.Loader<Cursor> arg0) {
+                ((SimpleCursorAdapter) getListAdapter()).swapCursor(null);
+            }
+        });
+
+
+
+
+
+
+
+}
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -116,7 +158,8 @@ public class PropertyListFragment extends ListFragment {
 
         // Notify the active callbacks interface (the activity, if the
         // fragment is attached to one) that an item has been selected.
-        mCallbacks.onItemSelected(DummyContent.ITEMS.get(position).id);
+        //mCallbacks.onItemSelected(DummyContent.ITEMS.get(position).id);
+        mCallbacks.onItemSelected(getListAdapter().getItemId(position));
     }
 
     @Override

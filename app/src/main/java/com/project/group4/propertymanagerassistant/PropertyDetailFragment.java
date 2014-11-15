@@ -1,17 +1,19 @@
 package com.project.group4.propertymanagerassistant;
 
+import android.net.rtp.AudioGroup;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 
-import com.project.group4.propertymanagerassistant.dummy.DummyContent;
+import com.project.group4.propertymanagerassistant.database.DummyContent;
 
 /**
  * A fragment representing a single Property detail screen.
@@ -19,12 +21,17 @@ import com.project.group4.propertymanagerassistant.dummy.DummyContent;
  * in two-pane mode (on tablets) or a {@link PropertyDetailActivity}
  * on handsets.
  */
-public class PropertyDetailFragment extends Fragment {
+public class PropertyDetailFragment extends Fragment{
     /**
      * The fragment argument representing the item ID that this fragment
      * represents.
      */
     public static final String ARG_ITEM_ID = "item_id";
+    /**
+     * The fragment argument representing if this is a new property we are adding
+     */
+    public static final String ARG_ITEM_NEW = "new_property";
+
 
     /**
      * The dummy content this fragment is presenting.
@@ -35,7 +42,7 @@ public class PropertyDetailFragment extends Fragment {
     ViewPager viewPager=null;
     //Declare TabAdaptor
     TabAdapter myTabAdapter;
-
+    //int selectedTab = 0;//
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -45,45 +52,39 @@ public class PropertyDetailFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-/*removed
-
-        setContentView(R.layout.activity_property_detail);
-        viewPager = (ViewPager) findViewById(R.id.pager);//get pager from app xml, need to assign it to current view
-        myTabAdapter = new TabAdapter(getSupportFragmentManager());
-        // FragmentManager fragmentManager = getFragmentManager();//frag manager
-        viewPager.setAdapter(myTabAdapter);
-*/
-        if (getArguments().containsKey(ARG_ITEM_ID)) {
-            // Load the dummy content specified by the fragment
-            // arguments. In a real-world scenario, use a Loader
-            // to load content from a content provider.
-            mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
-        }
+    public void onCreate(Bundle savedInstanceState) {super.onCreate(savedInstanceState);
+       }
 
 
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
+
         View rootView = inflater.inflate(R.layout.view_tab_pager, container, false);
-
-
         viewPager = (ViewPager) rootView.findViewById(R.id.pager);//get pager from app xml, need to assign it to current view
         myTabAdapter = new TabAdapter(getFragmentManager());
-        // FragmentManager fragmentManager = getFragmentManager();//frag manager
         viewPager.setAdapter(myTabAdapter);
+/*Left this in long for clarity
+ *replace next 2 lines with {lin1 and 2}
+ * if(getArguments().getBoolean(ARG_ITEM_NEW))
+ */
+        Boolean selectedTab = getArguments().getBoolean(ARG_ITEM_NEW);//line1
+        if(selectedTab){//line2
+            viewPager.setCurrentItem(1, true);//This works, but true dosnt doo much...NEED A COMM TO SET IT?
+        }
 
-//on fragment a b c for now
-        // Show the dummy content as text in a TextView.
-      //  if (mItem != null) {
-      //      ((TextView) rootView.findViewById(R.id.property_detail)).setText(mItem.content);
-      //  }
-
+        /**
+         * Here, I pass the selected ID from the list to the adaptor.
+         * The adaptor will later set the active fragment with the id.
+         * That fragment will use it to query the database.
+         * There is a better way to do this, but I suck.
+         * Should be able to use bundle like we did here. To be continued...
+         */
+        if (getArguments().containsKey(ARG_ITEM_ID)) {
+            myTabAdapter.setId(getArguments().getLong(ARG_ITEM_ID));//Send ID to adaptor to have the property id for all fragments
+        }
         return rootView;
     }
-
 
 }

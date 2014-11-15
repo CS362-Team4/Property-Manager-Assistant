@@ -7,6 +7,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
+import android.support.v4.view.ViewPager;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 
 
@@ -21,9 +25,13 @@ import android.view.MenuItem;
  */
 public class PropertyDetailActivity extends FragmentActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
         setContentView(R.layout.activity_property_detail);
 
         // Show the Up button in the action bar.
@@ -39,36 +47,50 @@ public class PropertyDetailActivity extends FragmentActivity {
         // http://developer.android.com/guide/components/fragments.html
         //
         if (savedInstanceState == null) {
+/** This is an example on how to recive items from calling activity.
+ *  Below, we got the id in a long call, but same idea.
+ *  In fact, lets just keep passing it so we can remove that junky logic before this activity
+            Bundle extras = getIntent().getExtras();
+            Long id = extras.getLong(PropertyDetailFragment.ARG_ITEM_ID); //Get the incomming ID, uses ARG_ITEM_ID from that fragment in previous call
+            Boolean newProperty = extras.getBoolean("NEW");
+*/
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
             Bundle arguments = new Bundle();
-            arguments.putString(PropertyDetailFragment.ARG_ITEM_ID,
-                    getIntent().getStringExtra(PropertyDetailFragment.ARG_ITEM_ID));
+
+            arguments.putLong(PropertyDetailFragment.ARG_ITEM_ID,
+                    getIntent().getLongExtra(PropertyDetailFragment.ARG_ITEM_ID, -1));
+            arguments.putBoolean(PropertyDetailFragment.ARG_ITEM_NEW,
+                    getIntent().getBooleanExtra(PropertyDetailFragment.ARG_ITEM_NEW,false/*default*/));//PROOFING
+
             PropertyDetailFragment fragment = new PropertyDetailFragment();
 
-
             fragment.setArguments(arguments);
-            //
+
             FragmentManager fragmentManager = getSupportFragmentManager();//get frag manager
+
             fragmentManager.beginTransaction().add(R.id.property_detail_container, fragment).commit();//set it
-            //getFragmentManager().beginTransaction().add(R.id.property_detail_container, fragment).commit();
+
         }
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == android.R.id.home) {
-            // This ID represents the Home or Up button. In the case of this
-            // activity, the Up button is shown. Use NavUtils to allow users
-            // to navigate up one level in the application structure. For
-            // more details, see the Navigation pattern on Android Design:
-            //
-            // http://developer.android.com/design/patterns/navigation.html#up-vs-back
-            //
-            NavUtils.navigateUpTo(this, new Intent(this, PropertyListActivity.class));
-            return true;
+        boolean result = false;
+        switch (item.getItemId()){
+            case android.R.id.home:
+                NavUtils.navigateUpTo(this, new Intent(this, PropertyListActivity.class));
+                result = true;
+                break;
+            default:
+                break;
+
         }
-        return super.onOptionsItemSelected(item);
+
+        return result;
+//        //return super.onOptionsItemSelected(item);
     }
+
+
 }
