@@ -67,16 +67,46 @@ setHasOptionsMenu(true);
         Log.d("FragmentOwnerTab", "Here now, with " + data);//testing
     }
 
-
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        menu.add("Edit");
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        menu.removeItem(2);
+        menu.add(menu.NONE, 2, 2, "Edit");
     }
+//
+//    @Override
+//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//        super.onCreateOptionsMenu(menu, inflater);
+//
+//        if ( 1 == menu.size() ){//MUST BE IN 2 PANE MODE
+//            menu.removeItem(2);
+//            menu.add(menu.NONE, 2, 2, "Edit");
+//        }
+//        else{//IN SINGLE PANE MODE
+//           // menu.clear();
+//            menu.add(menu.NONE, 2, 2, "Edit");
+//        }
+
+
+/**
+
+
+        if ( temp.isEnabled() ) {
+            menu.clear();
+            inflater.inflate(R.menu.list_activity_small, menu);
+            menu.add("Edit");
+        }
+        else{
+            menu.clear();
+            menu.add("Edit");
+        }
+ */
+
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Log.d("WTF","Do Something");
+        Log.d("FragmentOwnersTab","onOptionsItemSelected");
         return super.onOptionsItemSelected(item);
     }
 

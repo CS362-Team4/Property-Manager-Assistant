@@ -82,6 +82,12 @@ public class FragmentPropertyTab extends Fragment {
     }
 
 
+    @Override
+    public void onPause() {
+        Log.d("OnPaused?" , "Yes...");
+        super.onPause();
+    }
+
     //MAYNOT NEED RIGHT NOW
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -108,14 +114,24 @@ public class FragmentPropertyTab extends Fragment {
 */
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        menu.add("Edit");
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        menu.removeItem(2);
+        menu.add(menu.NONE, 2, 2, "Edit");
     }
+
+
+    //    @Override
+//    public void onPrepareOptionsMenu(Menu menu) {
+//        super.onPrepareOptionsMenu(menu);
+//        menu.clear();
+//        menu.add("Edit");
+//
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Log.d("WTF","Do Something");
+        Log.d("FragmentPropertyTab","onOptionsItemSelected");
         return super.onOptionsItemSelected(item);
     }
 }

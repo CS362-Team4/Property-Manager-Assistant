@@ -131,7 +131,9 @@ public class PropertyListActivity extends FragmentActivity
 /** Only offer "New Property" item in main activity.
  *  All other menu items will be handled in their respective fragments
  */
-        inflater.inflate(R.menu.list_activity_small, menu);
+        //inflater.inflate(R.menu.list_activity_small, menu);
+
+        menu.add(menu.NONE, 1, 1, "Add New Property");
 
 /**
 
@@ -175,7 +177,7 @@ public class PropertyListActivity extends FragmentActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         boolean result = false;
         switch (item.getItemId()){
-            case R.id.newProperty:
+            case 1://New property = 1. no xml right now
                 newProperty = true;
 //                editProperty = false;
 //                editTenant = false;

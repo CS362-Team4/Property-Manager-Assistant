@@ -53,7 +53,12 @@ public class PropertyDetailFragment extends Fragment{
 
     @Override
     public void onCreate(Bundle savedInstanceState) {super.onCreate(savedInstanceState);
+
+        ;//TEST
+
        }
+
+
 
 
 
@@ -87,4 +92,19 @@ public class PropertyDetailFragment extends Fragment{
         return rootView;
     }
 
+
+//TEST
+    @Override
+    public void onPause() {
+        setHasOptionsMenu(true);
+       // how to clean up...
+        Log.d("PropDetailFrag", "PAUSED");
+        super.onPause();
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        menu.clear();
+        super.onPrepareOptionsMenu(menu);
+    }
 }

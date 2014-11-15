@@ -10,6 +10,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
@@ -79,7 +80,6 @@ public class PropertyListFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("PropListFragment", "PropListFrag: onCreate");
         // TODO: replace with a real list adapter.
         //HERE WE NEED TO GET OUR CUSTOM LAYOUT
         setListAdapter(new SimpleCursorAdapter(getActivity(),
@@ -190,6 +190,11 @@ public class PropertyListFragment extends ListFragment {
             getListView().setItemChecked(position, true);
         }
 
+
+
         mActivatedPosition = position;
     }
+
+
+
 }
