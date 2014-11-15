@@ -3,7 +3,10 @@
     xmlns:andriod="http://schemas.android.com/apk/res/android"
     andriod:layout_height="match_parent"
     andriod:id="@+id/pager"
-    andriod:layout_width="match_parent">
+    andriod:layout_width="match_parent"
+    andriod:tag="tab_pager">
+
+
 
     <android.support.v4.view.PagerTitleStrip
         andriod:layout_width="match_parent"
