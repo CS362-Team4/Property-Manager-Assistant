@@ -93,6 +93,7 @@ public class PropertyListActivity extends FragmentActivity
         Bundle arguments = new Bundle();
         arguments.putLong(PropertyDetailFragment.ARG_ITEM_ID, id);
         arguments.putBoolean(PropertyDetailFragment.ARG_ITEM_NEW, newProperty);//Selected in options menu
+        newProperty = false;//Reset this flag AFTER USAGE
 
         if (mTwoPane) {
             // In two-pane mode, show the detail view in this activity by
@@ -119,7 +120,6 @@ public class PropertyListActivity extends FragmentActivity
             detailIntent.putExtras(arguments);
             //detailIntent.putExtra(PropertyDetailFragment.ARG_ITEM_ID, id);
             startActivity(detailIntent);
-            //HOW TO DEFAULT TO PROPRTY TAB???
 
         }
     }
@@ -154,19 +154,6 @@ public class PropertyListActivity extends FragmentActivity
 
         return true;
     }
-
-
-
-//    @Override
-//    public boolean onPrepareOptionsMenu(Menu menu) {
-//
-//        super.onPrepareOptionsMenu(menu);
-//        if(mTwoPane) {
-//            editTenantItem.setVisible(propertySelected);
-//            editPropertyItem.setVisible(propertySelected);
-//        }
-//        return true;
-//    }
 
     /**
      * Action to perform when the user selects an item from menu

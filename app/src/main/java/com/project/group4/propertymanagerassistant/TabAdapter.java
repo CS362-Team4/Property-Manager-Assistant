@@ -10,11 +10,14 @@ class TabAdapter extends FragmentStatePagerAdapter {//to save state, use statepa
                                                 //will call savestate when scroll two fragments away, and it will detach, which destroys
                                                 //usefull when you wan to save state
 
+
+
     //MY LOGGING ID STRING
     private static final String TAG = "TabAdaptor";
 
     //Set current object propertyId
     Long propertyId;
+    Boolean newProperty;
 
 
 //base constructor
@@ -33,7 +36,8 @@ class TabAdapter extends FragmentStatePagerAdapter {//to save state, use statepa
         }
         if(i==1){
             fragment = new FragmentPropertyTab();
-            ((FragmentPropertyTab) fragment).setPropertyId(propertyId);//Passing property id to the fragment
+            ((FragmentPropertyTab) fragment).setPropertyId(propertyId, newProperty);//Passing property id and property status to the
+            // fragment. Must be a better way...
         }
         if(i==2){
             fragment = new FragmentTenantTab();
@@ -86,8 +90,9 @@ class TabAdapter extends FragmentStatePagerAdapter {//to save state, use statepa
     }
 
     //Sets the property id for any fragment
-    public void setId(Long data){
+    public void setId(Long data, Boolean status){
         propertyId = data;
+        newProperty = status;
     }
 
 

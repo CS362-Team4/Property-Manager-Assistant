@@ -54,7 +54,6 @@ public class PropertyDetailFragment extends Fragment{
     @Override
     public void onCreate(Bundle savedInstanceState) {super.onCreate(savedInstanceState);
 
-        ;//TEST
 
        }
 
@@ -76,7 +75,7 @@ public class PropertyDetailFragment extends Fragment{
  */
         Boolean selectedTab = getArguments().getBoolean(ARG_ITEM_NEW);//line1
         if(selectedTab){//line2
-            viewPager.setCurrentItem(1, true);//This works, but true dosnt doo much...NEED A COMM TO SET IT?
+            viewPager.setCurrentItem(1, true);//This works,
         }
 
         /**
@@ -87,24 +86,25 @@ public class PropertyDetailFragment extends Fragment{
          * Should be able to use bundle like we did here. To be continued...
          */
         if (getArguments().containsKey(ARG_ITEM_ID)) {
-            myTabAdapter.setId(getArguments().getLong(ARG_ITEM_ID));//Send ID to adaptor to have the property id for all fragments
+            myTabAdapter.setId(getArguments().getLong(ARG_ITEM_ID), getArguments().getBoolean(ARG_ITEM_NEW));//Send ID to adaptor to have the property id for all fragments
+
         }
         return rootView;
     }
 
 
-//TEST
-    @Override
-    public void onPause() {
-        setHasOptionsMenu(true);
-       // how to clean up...
-        Log.d("PropDetailFrag", "PAUSED");
-        super.onPause();
-    }
-
-    @Override
-    public void onPrepareOptionsMenu(Menu menu) {
-        menu.clear();
-        super.onPrepareOptionsMenu(menu);
-    }
+////TEST
+//    @Override
+//    public void onPause() {
+//        setHasOptionsMenu(true);
+//       // how to clean up...
+//        Log.d("PropDetailFrag", "PAUSED");
+//        super.onPause();
+//    }
+//
+//    @Override
+//    public void onPrepareOptionsMenu(Menu menu) {
+//        menu.clear();
+//        super.onPrepareOptionsMenu(menu);
+//    }
 }
