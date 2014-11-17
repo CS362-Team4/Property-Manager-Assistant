@@ -1,19 +1,11 @@
 package com.project.group4.propertymanagerassistant;
 
-import android.net.rtp.AudioGroup;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
-
-import com.project.group4.propertymanagerassistant.database.DummyContent;
 
 /**
  * A fragment representing a single Property detail screen.
@@ -36,7 +28,7 @@ public class PropertyDetailFragment extends Fragment{
     /**
      * The dummy content this fragment is presenting.
      */
-    private DummyContent.DummyItem mItem;
+    //private DummyContent.DummyItem mItem;
 
     //create viewPager
     ViewPager viewPager=null;

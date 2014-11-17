@@ -41,6 +41,7 @@ class TabAdapter extends FragmentStatePagerAdapter {//to save state, use statepa
         }
         if(i==2){
             fragment = new FragmentTenantTab();
+            ((FragmentTenantTab) fragment).setPropertyId(propertyId, newProperty);
 
         }
         if(i==3){

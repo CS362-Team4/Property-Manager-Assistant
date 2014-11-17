@@ -9,14 +9,10 @@ import android.support.v4.widget.SimpleCursorAdapter;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ListView;
 
 
-import com.project.group4.propertymanagerassistant.database.DummyContent;
 import com.project.group4.propertymanagerassistant.database.Property;
 import com.project.group4.propertymanagerassistant.database.PropertyProvider;
 
@@ -80,7 +76,7 @@ public class PropertyListFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // TODO: replace with a real list adapter.
+
         //HERE WE NEED TO GET OUR CUSTOM LAYOUT
         setListAdapter(new SimpleCursorAdapter(getActivity(),
                 android.R.layout.simple_list_item_activated_1,

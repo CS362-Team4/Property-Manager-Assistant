@@ -6,16 +6,13 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.project.group4.propertymanagerassistant.R;
 import com.project.group4.propertymanagerassistant.database.DatabaseHandler;
 import com.project.group4.propertymanagerassistant.database.Property;
 
@@ -38,7 +35,7 @@ public class FragmentPropertyTab extends Fragment implements View.OnClickListene
     Button saveButton;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_property_detail, container, false);
+        View view = inflater.inflate(R.layout.fragment_property_tab, container, false);
         //Button to save.
 
         saveButton = (Button) view.findViewById(R.id.property_save_button);
