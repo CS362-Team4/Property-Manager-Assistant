@@ -30,7 +30,7 @@ public class FragmentPropertyTab extends Fragment implements View.OnClickListene
 
     String textString;
     Long propertyId;
-    Boolean newProperty;
+    Boolean newProperty=false;
     TextView text;
     Button saveButton;
     @Override
@@ -40,6 +40,7 @@ public class FragmentPropertyTab extends Fragment implements View.OnClickListene
 
         saveButton = (Button) view.findViewById(R.id.property_save_button);
         saveButton.setOnClickListener(this);
+        Log.d("WTF!", "CRAP:"+newProperty);
         if(!newProperty)
             saveButton.setVisibility(View.GONE);
 
